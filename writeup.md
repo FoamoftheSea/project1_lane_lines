@@ -27,6 +27,7 @@ My lane-finding pipeline consisted of 5 steps to generate lines, and 3 optional 
 5. Masked edges are sent through cv2.HoughLinesP to generate lines
 
 Optional steps:
+
 6. Lines are filtered based on a minimum slope value to ignore horizontal lines
 7. Filtered lines are then merged based on slope and intercept similarity
 8. Lines are extrapolated from image bottom to the top of the region of interest
@@ -50,7 +51,7 @@ Lane lines with filtering, merging, and extrapolation:
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-One definite shortcoming of this pipeline is that it is not designed to take curved lanes, or intersections into account, and is therefore only really suitable for highways and straight roads.
+One clear shortcoming of this pipeline is that it is not designed to take curved lanes, or intersections into account, and is therefore only really suitable for highways and straight roads.
 
 Other shortcomings present themselves when applying the pipeline to the challenge video. When the car passes over an overpass, there is a color shift in the pavement which causes it to lose track of the yellow line due to lack of contrast/gradient. Also, the curvature of the lanes causes discontinuities in line detection. Noise on the shoulder was able to be handled by modifying pipeline parameters, however, by increasing size of Gaussian kernel.
 
@@ -62,3 +63,5 @@ Additionally, while the pipeline was able to operate in better than real time on
 One definite improvement would be to add functionality for curved lines, as well as finding the center of the lane from the lane lines that it finds, and estimating the car's position relative to lane center. This is going to be the objective of the next project, so I look forward to learning to do this.
 
 Another improvement would be to find a fix for the errors caused by pavement color variance. This could possibly be done by increasing the contrast of the image after the blurring is done, since this may help the yellow stand out on brownish pavement, without increasing the effects of noise on the pipeline.
+
+Lastly, the default parameters for the Lane_Finder class were chosen because they worked well on the provided images, but it is possible that even more robust defaults could have been determined with more testing materials. Further, it may be possible to have the pipeline detect characteristics of the input images, and then modify its own parameters accordingly, although this would take a good amount of trial and error.
